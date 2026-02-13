@@ -1,0 +1,339 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=UnifrakturMaguntia&display=swap');
+
+:root {
+  --mahogany: #3E2723;
+  --leather: #5D4037;
+  --gold: #D4AF37;
+  --parchment: #F5E6D3;
+  --sepia: #704214;
+  --burgundy: #800020;
+}
+
+@layer base {
+  * {
+    @apply border-leather;
+  }
+  
+  body {
+    @apply bg-mahogany text-parchment font-body;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(93, 64, 55, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(128, 0, 32, 0.05) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-gold;
+  }
+  
+  /* Disable right-click */
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Allow selection in text editors */
+  .allow-select,
+  .allow-select * {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+}
+
+@layer components {
+  /* Leather Texture Effect */
+  .leather-bg {
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 50%, #5D4037 100%);
+    background-size: 200% 200%;
+    position: relative;
+  }
+  
+  .leather-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px),
+      repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 0, 0, 0.1) 2px, rgba(0, 0, 0, 0.1) 4px);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  
+  .leather-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* Parchment Effect */
+  .parchment-bg {
+    background: linear-gradient(to bottom, #F5E6D3, #E8D4B8);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .parchment-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(112, 66, 20, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(112, 66, 20, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  
+  /* Ornamental Divider */
+  .ornamental-divider {
+    @apply relative my-8 text-center;
+  }
+  
+  .ornamental-divider::before,
+  .ornamental-divider::after {
+    content: '◆ ❖ ◆';
+    @apply text-gold opacity-50 text-sm;
+  }
+  
+  /* Gold Button */
+  .btn-gold {
+    @apply px-6 py-3 bg-gradient-to-b from-gold to-gold-dark text-mahogany font-semibold rounded-lg;
+    @apply shadow-embossed hover:shadow-gold-glow transition-all duration-300;
+    @apply border-2 border-gold-dark;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-gold::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn-gold:hover::before {
+    left: 100%;
+  }
+  
+  /* Leather Button */
+  .btn-leather {
+    @apply px-6 py-3 leather-bg text-gold font-semibold rounded-lg;
+    @apply shadow-leather hover:shadow-gold-glow transition-all duration-300;
+    @apply border-2 border-leather-dark;
+  }
+  
+  /* Input Field */
+  .input-field {
+    @apply w-full px-4 py-3 parchment-bg text-sepia rounded-lg;
+    @apply border-2 border-leather shadow-inset-deep;
+    @apply focus:border-gold focus:shadow-gold-glow focus:outline-none;
+    @apply transition-all duration-300;
+  }
+  
+  /* Card */
+  .card {
+    @apply leather-bg rounded-xl shadow-ornate p-6;
+    @apply border-2 border-gold/20;
+    position: relative;
+  }
+  
+  .card::before {
+    content: '✦';
+    @apply absolute top-2 left-2 text-gold/30 text-xs;
+  }
+  
+  .card::after {
+    content: '✦';
+    @apply absolute bottom-2 right-2 text-gold/30 text-xs;
+  }
+  
+  /* Progress Bar */
+  .progress-bar {
+    @apply w-full h-4 bg-mahogany-dark rounded-full overflow-hidden;
+    @apply border-2 border-leather shadow-inset-deep;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-gradient-to-r from-gold-dark via-gold to-gold-bright;
+    @apply transition-all duration-500 ease-out;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+  
+  /* Tab Navigation */
+  .tab-btn {
+    @apply px-6 py-3 leather-bg text-parchment font-semibold rounded-t-lg;
+    @apply border-t-2 border-l-2 border-r-2 border-leather-dark;
+    @apply transition-all duration-300;
+    position: relative;
+  }
+  
+  .tab-btn.active {
+    @apply bg-leather-light text-gold border-gold;
+    @apply shadow-gold-glow;
+  }
+  
+  .tab-btn.active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-1 bg-gold;
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-mahogany-dark;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-leather rounded-full border-2 border-mahogany;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-leather-light;
+  }
+  
+  /* Tooltip */
+  .tooltip {
+    @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2;
+    @apply px-3 py-2 parchment-bg text-sepia text-sm rounded-lg;
+    @apply shadow-ornate border border-leather;
+    @apply opacity-0 pointer-events-none transition-opacity duration-300;
+    white-space: nowrap;
+  }
+  
+  .tooltip-trigger:hover .tooltip {
+    @apply opacity-100;
+  }
+  
+  /* Loading Spinner */
+  .spinner {
+    @apply inline-block w-8 h-8 border-4 border-leather-light border-t-gold rounded-full;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Fade In Animation */
+  .fade-in {
+    animation: fadeIn 0.8s ease-in forwards;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+  
+  /* Ornamental Corners */
+  .ornate-corners::before,
+  .ornate-corners::after {
+    content: '✦';
+    @apply absolute text-gold text-2xl;
+  }
+  
+  .ornate-corners::before {
+    @apply top-2 left-2;
+  }
+  
+  .ornate-corners::after {
+    @apply bottom-2 right-2;
+  }
+}
+
+@layer utilities {
+  .text-shadow-gold {
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .emboss-text {
+    text-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.3),
+      0 -1px 0 rgba(0, 0, 0, 0.7);
+  }
+  
+  .grain-effect {
+    position: relative;
+  }
+  
+  .grain-effect::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+  }
+}
+
+/* Rich Text Editor Styles */
+.ProseMirror {
+  @apply parchment-bg text-sepia p-4 rounded-lg min-h-[200px];
+  @apply focus:outline-none;
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-display text-burgundy mb-4;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-display text-burgundy mb-3;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-display text-burgundy mb-2;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  @apply ml-6 mb-4;
+}
+
+.ProseMirror li {
+  @apply mb-2;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-gold pl-4 italic my-4 text-sepia-light;
+}
+
+.ProseMirror strong {
+  @apply font-bold text-burgundy;
+}
+
+.ProseMirror em {
+  @apply italic;
+}
+
+.ProseMirror p {
+  @apply mb-4;
+}
